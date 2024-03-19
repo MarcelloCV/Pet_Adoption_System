@@ -10,6 +10,7 @@ public abstract class Pets{
         this.weight = weight;
     }
 }
+
 //Tiap class hrs punya method khasnya
 class dog extends Pets{
   
