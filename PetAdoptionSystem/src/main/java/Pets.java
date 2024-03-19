@@ -1,3 +1,8 @@
+interface InnerPets {
+   public void adpot();
+   public void description();
+ }
+
 public abstract class Pets{
   protected String name;
   protected String AnimalType;
@@ -10,33 +15,73 @@ public abstract class Pets{
         this.weight = weight;
     }
 }
+
 //Tiap class hrs punya method khasnya
-class dog extends Pets{
-  
+class dog extends Pets implements InnerPets{
+  final String species = "dog";
   String breed;
-  String color;
-  public dog(String name, String animalType, int age, int weight, String breed, String color) {
+  String description;
+
+  dog(String name, String animalType, int age, int weight, String breed, String color) {
     super(name, animalType, age, weight);
     this.breed = breed;
-    this.color = color;
   }
-  
+  @Override
+  public void adpot(){
+
+  }
+  public void description(){
+
+  }
 }
 
-class cat extends Pets{
+class cat extends Pets implements InnerPets{
+  final String species = "cat";
   String breed;
-  String color;
+  String description;
   public cat(String name, String animalType, int age, int weight, String breed, String color) {
     super(name, animalType, age, weight);
     this.breed = breed;
-    this.color = color;
+  }
+  @Override
+  public void adpot(){
+
+  }
+  public void description(){
+
   }
 }
 
-class bird extends Pets{
+class bird extends Pets implements InnerPets{
+  String species;
+  String description;
+
+  public bird(String name, String animalType, int age, int weight, String species, String color) {
+    super(name, animalType, age, weight);
+    this.species = species;
+  }
+  @Override
+  public void adpot(){
+
+  }
+  public void description(){
+
+  }
   
 }
 
-class hamster extends Pets{
+class hamster extends Pets implements InnerPets{
+  String description;
+
+  public hamster(String name, String animalType, int age, int weight) {
+    super(name, animalType, age, weight);
+ }
+  @Override
+  public void adpot(){
+
+  }
+  public void description(){
+
+  }
   
 }
