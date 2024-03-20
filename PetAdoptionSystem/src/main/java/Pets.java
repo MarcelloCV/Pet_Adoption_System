@@ -1,6 +1,7 @@
 interface InnerPets {
-   public void adpot();
+   public void adopt();
    public void description();
+   
  }
 
 public abstract class Pets{
@@ -27,7 +28,7 @@ class dog extends Pets implements InnerPets{
     this.breed = breed;
   }
   @Override
-  public void adpot(){
+  public void adopt(){
 
   }
   public void description(){
@@ -67,7 +68,6 @@ class bird extends Pets implements InnerPets{
   public void description(){
 
   }
-  
 }
 
 class hamster extends Pets implements InnerPets{
@@ -75,13 +75,11 @@ class hamster extends Pets implements InnerPets{
 
   public hamster(String name, String animalType, int age, int weight) {
     super(name, animalType, age, weight);
- }
+  }
+
   @Override
   public void adpot(){
-
   }
   public void description(){
-
-  }
-  
+  } 
 }
