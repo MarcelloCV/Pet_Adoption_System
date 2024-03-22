@@ -4,7 +4,6 @@ interface InnerPets {
    public void ascii();
 }
 
-
 public abstract class Pets{
   ArrayList<Pets> petsList = new ArrayList<>();  
   protected String name;
