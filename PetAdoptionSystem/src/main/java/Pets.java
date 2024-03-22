@@ -1,85 +1,109 @@
+import java.util.ArrayList;
+
 interface InnerPets {
-   public void adopt();
-   public void description();
-   
- }
+   public void ascii();
+}
+
 
 public abstract class Pets{
+  ArrayList<Pets> petsList = new ArrayList<>();  
   protected String name;
-  protected String AnimalType;
+  protected String animalType;
   protected int age;
   protected int weight;
-    public Pets(String name, String animalType, int age, int weight) {
-        this.name = name;
-        this.AnimalType = animalType;
-        this.age = age;
-        this.weight = weight;
-    }
+  protected String gender;
+  protected String breed; 
+  protected String misc;
+
+  public Pets(String name, String animalType, int age, int weight, String gender, String misc) {
+    this.name = name;
+    this.animalType = animalType;
+    this.age = age;
+    this.weight = weight;
+    this.gender = gender;
+    this.misc = misc;
+  }
+
+  public void description(){
+    System.out.printf(
+      "Name: %s\n Animal Type: %s\n Age: %s\n Weight: %s\n Gender %s",
+      name, animalType , age, weight, gender
+    );
+  }
+
+  public void adpot(){
+    
+  }
 }
 
 //Tiap class hrs punya method khasnya
 class dog extends Pets implements InnerPets{
-  final String species = "dog";
-  String breed;
-  String description;
-
-  dog(String name, String animalType, int age, int weight, String breed, String color) {
-    super(name, animalType, age, weight);
-    this.breed = breed;
+  public dog(String name,  int age, int weight, String gender, String misc) {
+    super(name, "dog" , age, weight, gender, misc);
   }
   @Override
-  public void adopt(){
+  public void ascii(){
+    System.out.println("\n" +
+    "   |\\|\\\n" +
+    "  ..    \\       .\n" +
+    "o--     \\\\    / @)\n" +
+    " v__///\\\\\\\\__/ @\n" +
+    "   {           }\n" +
+    "    {  } \\\\\\{  }\n" +
+    "    <_|      <_|\n");
 
   }
-  public void description(){
-
+  public void makeaNoise(){
   }
 }
 
 class cat extends Pets implements InnerPets{
-  final String species = "cat";
-  String breed;
-  String description;
-  public cat(String name, String animalType, int age, int weight, String breed, String color) {
-    super(name, animalType, age, weight);
-    this.breed = breed;
+  public cat(String name, int age, int weight, String gender, String misc) {
+    super(name, "cat", age, weight, gender, misc);
   }
-  @Override
-  public void adpot(){
 
-  }
-  public void description(){
-
+  public void ascii(){
+    System.out.println("\n" +
+    "    /\\_____/\\\n" +
+    "   /  o   o  \\\n" +
+    "  ( ==  ^  == )\n" +
+    "   )         (\n" +
+    "  (           )\n" +
+    " ( (  )   (  ) )\n" +
+    "(__(__)___(__)__)\n");
   }
 }
 
 class bird extends Pets implements InnerPets{
-  String species;
-  String description;
-
-  public bird(String name, String animalType, int age, int weight, String species, String color) {
-    super(name, animalType, age, weight);
-    this.species = species;
+  public bird(String name, int age, int weight, String gender, String misc) {
+    super(name, "bird", age, weight, gender, misc);
   }
-  @Override
-  public void adpot(){
-
-  }
-  public void description(){
-
+  public void ascii(){
+    System.out.println("\n" +
+    "   (\n" +
+    "  `-`-.\n" +
+    "  '( @ >\n" +
+    "   _) (\n" +
+    "  /    )\n" +
+    " /_,'  / \n" +
+    "   \\  / \n" +
+    "===m\"\"m===\n");
   }
 }
 
-class hamster extends Pets implements InnerPets{
-  String description;
-
-  public hamster(String name, String animalType, int age, int weight) {
-    super(name, animalType, age, weight);
+class bunny extends Pets implements InnerPets{
+  static final String animalType = "bunny";
+  public bunny(String name,  int age, int weight, String gender, String misc) {
+    super(name, animalType, age, weight, gender, misc);
   }
 
-  @Override
-  public void adpot(){
+  public void ascii(){  
+    System.out.println("\n" +
+    "       _\n" +
+    "      (\\\\\n" +
+    "       \\||\n" +
+    "     __(_\";\n" +
+    "    /    \\\n" +
+    "   {}___)\\)_\n");
   }
-  public void description(){
-  } 
 }
