@@ -39,7 +39,7 @@ public class Application {
           search();
           break;
         case "2":
-          FAQ();
+        PetFAQ.FAQ();
           break;
         case "3":
           return;
@@ -133,18 +133,6 @@ public class Application {
 
   public static void search(){
     String i = keyboard.nextLine();
-
-  }
-
-  public static void description(){
-
-  }
-
-  public static void applyToAdopt(){
-
-  }
-
-  public static void FAQ(){
 
   }
 }

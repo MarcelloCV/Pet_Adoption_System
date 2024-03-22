@@ -1,11 +1,12 @@
 import java.util.ArrayList;
-
+import java.util.HashMap;
 interface InnerPets {
    public void ascii();
 }
 
 public abstract class Pets{
-  ArrayList<Pets> petsList = new ArrayList<>();  
+  protected HashMap<String, String> adoptList = new HashMap<>();
+  protected ArrayList<Pets> petsList = new ArrayList<>();  
   protected String name;
   protected String animalType;
   protected int age;
@@ -30,9 +31,7 @@ public abstract class Pets{
     );
   }
 
-  public void adpot(){
-    
-  }
+  public abstract void ascii();
 }
 
 //Tiap class hrs punya method khasnya
@@ -61,6 +60,7 @@ class cat extends Pets implements InnerPets{
     super(name, "cat", age, weight, gender, misc);
   }
 
+  @Override
   public void ascii(){
     System.out.println("\n" +
     "    /\\_____/\\\n" +
@@ -77,6 +77,7 @@ class bird extends Pets implements InnerPets{
   public bird(String name, int age, int weight, String gender, String misc) {
     super(name, "bird", age, weight, gender, misc);
   }
+  @Override
   public void ascii(){
     System.out.println("\n" +
     "   (\n" +
@@ -96,6 +97,7 @@ class bunny extends Pets implements InnerPets{
     super(name, animalType, age, weight, gender, misc);
   }
 
+  @Override
   public void ascii(){  
     System.out.println("\n" +
     "       _\n" +
