@@ -1,11 +1,20 @@
+
+
+import java.util.List;
 import java.util.ArrayList;
 
-interface InnerPets {
-   public void ascii();
+@FunctionalInterface
+interface ASCIIArt{
+   public void ASCIIArt();
+}
+class name, age{
+  String name = name;
 }
 
+
 public abstract class Pets{
-  ArrayList<Pets> petsList = new ArrayList<>();  
+  static List<Pets> petAdoptionList = new ArrayList<>();
+  static List<Pets> petList = new ArrayList<>();  
   protected String name;
   protected String animalType;
   protected int age;
@@ -29,19 +38,15 @@ public abstract class Pets{
       name, animalType , age, weight, gender
     );
   }
-
-  public void adpot(){
-    
-  }
 }
 
 //Tiap class hrs punya method khasnya
-class dog extends Pets implements InnerPets{
+class dog extends Pets implements ASCIIArt{
   public dog(String name,  int age, int weight, String gender, String misc) {
     super(name, "dog" , age, weight, gender, misc);
   }
   @Override
-  public void ascii(){
+  public void ASCIIArt(){
     System.out.println("\n" +
     "   |\\|\\\n" +
     "  ..    \\       .\n" +
@@ -56,12 +61,13 @@ class dog extends Pets implements InnerPets{
   }
 }
 
-class cat extends Pets implements InnerPets{
+class cat extends Pets implements ASCIIArt{
   public cat(String name, int age, int weight, String gender, String misc) {
     super(name, "cat", age, weight, gender, misc);
   }
 
-  public void ascii(){
+  @Override
+  public void ASCIIArt(){
     System.out.println("\n" +
     "    /\\_____/\\\n" +
     "   /  o   o  \\\n" +
@@ -73,11 +79,12 @@ class cat extends Pets implements InnerPets{
   }
 }
 
-class bird extends Pets implements InnerPets{
+class bird extends Pets implements ASCIIArt{
   public bird(String name, int age, int weight, String gender, String misc) {
     super(name, "bird", age, weight, gender, misc);
   }
-  public void ascii(){
+  @Override
+  public void ASCIIArt(){
     System.out.println("\n" +
     "   (\n" +
     "  `-`-.\n" +
@@ -90,13 +97,14 @@ class bird extends Pets implements InnerPets{
   }
 }
 
-class bunny extends Pets implements InnerPets{
+class bunny extends Pets implements ASCIIArt{
   static final String animalType = "bunny";
   public bunny(String name,  int age, int weight, String gender, String misc) {
     super(name, animalType, age, weight, gender, misc);
   }
 
-  public void ascii(){  
+  @Override
+  public void ASCIIArt(){  
     System.out.println("\n" +
     "       _\n" +
     "      (\\\\\n" +

@@ -36,7 +36,5 @@ public class Account{
     public static void setAccountMap(String username, String password) {
         accountMap.put(username, password);
     }  
-
-    
 }
 
