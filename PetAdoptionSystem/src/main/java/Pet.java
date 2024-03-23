@@ -32,7 +32,7 @@ public abstract class Pet{
   }
 }
 
-//Tiap class hrs punya method khasnya
+//Tiap class harus punya method khasnya
 class dog extends Pet implements ASCIIArt{
   public dog(String name,  int age, int weight, String gender) {
       super(name, "dog" , age, weight, gender);
@@ -47,7 +47,6 @@ class dog extends Pet implements ASCIIArt{
               "   {           }\n" +
               "    {  } \\\\\\{  }\n" +
               "    <_|      <_|\n");
-
   }
   public void makeaNoise(){
       System.out.println("woof woof!");
@@ -96,6 +95,7 @@ class bird extends Pet implements ASCIIArt{
       System.out.println("chirp chirp!");
   }
 }
+
 class bunny extends Pet implements ASCIIArt{
   static final String animalType = "bunny";
   public bunny(String name,  int age, double weight, String gender) {

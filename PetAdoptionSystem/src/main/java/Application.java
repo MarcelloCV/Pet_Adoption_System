@@ -219,10 +219,11 @@ public class Application {
         }
         break;
       }
-        for (Pet pet : matches) {
-          System.out.println("Showing "+matches.size() + "relevant results");
-        }
       }
+    }
+    System.out.println("Showing "+matches.size() + "relevant results");
+    for (Pet pet : matches) {
+      
     }
 
     for(Pet pet : matches) {
@@ -232,12 +233,12 @@ public class Application {
   }
 
     /*
-   * if ACCEPTABLE_DISTANCE is set to 2, then any string in the collection that is
+   * if ACCEPTABLE_DISTANCE is set to 5, then any string in the collection that is
    * at most 2 edits away from the search term will be considered a match. So, if we’re searching
    * for “apple”, then “aple” (1 deletion) and “apples” (1 insertion) would be matches, but “orange”
    * (5 substitutions) would not
    */
-  private static final int ACCEPTABLE_DISTANCE = 2;
+  private static final int ACCEPTABLE_DISTANCE = 5;
   /*
    * The Levenshtein distance between two strings is the minimum number of single-character edits
    * (insertions, deletions, or substitutions) required to change one string into the other.
@@ -245,8 +246,11 @@ public class Application {
   private static final LevenshteinDistance LEVENSHTEIN = new LevenshteinDistance();
 
   private static boolean isMatch(String term, String candidate) {
-      int distance = LEVENSHTEIN.apply(term, candidate);
-      return distance <= ACCEPTABLE_DISTANCE;
+      return stringDistance(term, candidate) <= ACCEPTABLE_DISTANCE;
+  }
+
+  private static int stringDistance(String term, String candidate) {
+    return LEVENSHTEIN.apply(term, candidate);
   }
 
   private static boolean isMatch(int term, int candidate) {
