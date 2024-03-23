@@ -14,7 +14,7 @@
     </includes>
   </configuration>
 
-<!-- To add dependency directly using Maven -->
+<!-- To add dependency directly using Maven public repositories -->
   <dependencies>
     <dependency>
         <groupId>org.apache.commons</groupId>
