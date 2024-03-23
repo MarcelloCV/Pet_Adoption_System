@@ -1,7 +1,6 @@
 import org.apache.commons.text.similarity.LevenshteinDistance;
 
 import Pets.attributes;
-
 import java.util.Scanner;
 import java.util.regex.Pattern;
 import java.util.List;
