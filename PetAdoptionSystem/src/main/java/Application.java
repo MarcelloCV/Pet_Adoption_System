@@ -6,14 +6,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.InputMismatchException;
 import java.util.Collections;
-import java.util.Set;
-import java.util.stream.*;
 
 public class Application {
+  CSVReader cat = new CSVReader();
   static Scanner keyboard = new Scanner(System.in);
 
   public static void main(String[] args) {
@@ -56,7 +52,7 @@ public class Application {
            * public static List<Pet> search(String term, List<Pet> pets) {
            * List<Pet> matches = new ArrayList<>();
            * for (Pet p : pets) {
-           * if (compare(term, p.name)) {
+           * if (isMatch(term, p.name)) {
            * matches.add(p);
            * }
            * }
@@ -66,7 +62,7 @@ public class Application {
           search();
           break;
         case "2":
-          FAQ();
+          PetFAQ.FAQ();
           break;
         case "3":
           return;
@@ -159,126 +155,119 @@ public class Application {
     }
   }
 
-  static List<Pet> matches = new ArrayList<>(Pet.pets);
-
   public static void search() {
     System.out.println("Search by (Separate just the number by comma to choose multiple):" +
         "1. Name, 2. Animal Type, 3. Age\n4. Weight, 5. Gender, 6. Breed");
-
-    //Store only distinct values    
-    Set<String> filter = new HashSet<>();
     
-    
+    List<String> filter = new ArrayList<>();
+    while (true) {
+    List<String> inputList = Arrays.asList(keyboard.nextLine().split(","));
     for (String key : Arrays.asList("1", "2", "3", "4", "5", "6")) {
-      List<String> inputList = Arrays.asList(keyboard.nextLine().trim().split(","));
       if (!inputList.contains(key)) {
         System.err.println("Choose one of the given options");
         continue;
       } else {
-        filter.add(key);
+    while (true) {
+      }
       }
     }
-    
 
-    Comparator<Pet> comparator = null;
+    List<Pet> matches = new ArrayList<>();
+     
     for (String key : filter) {
- 
-        Comparator<Pet> nextComparator = null;
+      for(Pet p : Pet.petList) {
       switch(key){
         case "1":
         System.out.print("Enter pet name: ");
-        nextComparator = Comparator.comparing(pet -> compare(pet, pet.name, keyboard.nextLine()));
+        if(isMatch(keyboard.nextLine(), p.name)){
+          matches.add(p);
+        }
         break;
 
         case "2":
         System.out.print("Enter pet type: ");
-        nextComparator = Comparator.comparing(pet -> compare(pet, pet.animalType, keyboard.nextLine()));
+        if(isMatch(keyboard.nextLine(), p.animalType)){
+          matches.add(p);
+        }
         break;
 
         case "3":
         System.out.print("Enter pet age: ");
-        nextComparator = Comparator.comparing(pet -> compare(pet, pet.age, keyboard.nextInt()));
+        if(isMatch(keyboard.nextInt(), p.age)){
+          matches.add(p);
+        }
         break;
 
         case "4":
         System.out.print("Enter pet weight: ");
-        nextComparator = Comparator.comparing(pet -> compare(pet, pet.weight, keyboard.nextInt()));
+        if (isMatch(keyboard.nextLine(), p.weight)) {
+          matches.add(p);
+        }
         break;
 
         case "5":
         System.out.print("Enter pet gender: ");
-        nextComparator = Comparator.comparing(pet -> compare(pet, pet.gender, keyboard.nextLine()));
+        if (isMatch(keyboard.nextLine(), p.gender)) {
+          matches.add(p);
+        }
         break;
 
         case "6":
         System.out.print("Enter pet breed: ");
-        nextComparator = Comparator.comparing(pet -> compare(pet, pet.breed, keyboard.nextLine()));
+        if (isMatch(keyboard.nextLine(), p.breed)) {
+          matches.add(p);
+        }
         break;
       }
-      if (comparator == null) {
-        comparator = nextComparator;
-    } else {
-        comparator = comparator.thenComparing(nextComparator);
+      }
     }
+    System.out.println("Showing "+matches.size() + "relevant results");
+    for (Pet pet : matches) {
+      
     }
-    Collections.sort(matches, comparator);
 
-    System.out.println("Found "+matches.size() + "relevant result"+(matches.size() > 1 ? "s" : "") + ".");
-    for (int i = 0; i < 5; i++) {
-      matches.get(i).description();
+    for(Pet pet : matches) {
+      System.out.println();
+      System.out.println();
     }
-    if(matches.size() > 5){
-      while(true){
-      System.out.println("Show more result"+(matches.size() > 6 ? "s" : ""+" ? (y/n)"));
-        switch(keyboard.nextLine()){
-          case "y"||"Y":
-          System.out.print("Enter number of rows to show: ");
-          try{
-          int input = keyboard.nextInt();
-          } catch (InputMismatchException e) {
-            System.err.println("Input must be numeric.");
-          }
-            for (int i = 5; i < input; i++) {
-              matches.get(i).description();
-            }
-            break;
-          case "n"||"N":
-            return;
-          default:
-            System.err.println("Choose one of the given options");
-            continue;
-        }
-    }
-    
   }
 
+    /*
+   * if ACCEPTABLE_DISTANCE is set to 5, then any string in the collection that is
+   * at most 2 edits away from the search term will be considered a match. So, if we’re searching
+   * for “apple”, then “aple” (1 deletion) and “apples” (1 insertion) would be matches, but “orange”
+   * (5 substitutions) would not
+   */
+  private static final int ACCEPTABLE_DISTANCE = 5;
+  /*
+   * The Levenshtein distance between two strings is the minimum number of single-character edits
+   * (insertions, deletions, or substitutions) required to change one string into the other.
+   */
   private static final LevenshteinDistance LEVENSHTEIN = new LevenshteinDistance();
 
-  private static int compare(Pet pet, String term, String candidate) {
-    
-     int distance = LEVENSHTEIN.apply(term, candidate);
-     //Search range tolerance of 30% for string values
-     if(distance >= (term.toCharArray().length * 30 / 100)){
-       matches.remove(pet);
-     }
-     return distance;
+  private static boolean isMatch(String term, String candidate) {
+      return stringDistance(term, candidate) <= ACCEPTABLE_DISTANCE;
   }
 
-  private static int compare(Pet pet, int term, int candidate) {
-    //Search range tolerance of 30% for integer values
-    if(candidate <= (term * 70 / 100) || candidate >= (term * 130 / 100)){
-        matches.remove(pet);
-    }
-    return candidate > term ? candidate-term : term-candidate;
+  private static int stringDistance(String term, String candidate) {
+    return LEVENSHTEIN.apply(term, candidate);
   }
 
-  private static double compare(Pet pet, double term, int candidate) {
-    //Search range tolerance of 30% for integer values
-    if(candidate <= (term * 70 / 100) || candidate >= (term * 130 / 100)){
-        matches.remove(pet);
-    }
-    return candidate > term ? candidate-term : term-candidate;
+  private static boolean isMatch(int term, int candidate) {
+    //Search range tolerance of 10%
+    return candidate <= (term * 90 / 100) || candidate >= (term * 110 / 100);
   }
+
+  private static List<Pet> sortResults(List<Pet> matches) {
+
+    Collections.sort(matches, new Comparator<Pet>() {
+      @Override
+      public int compare(Pet p1, Pet p2) {
+        return p1.name.compareTo(p2.name);
+      }
+    });
+  }
+
 
   private static Map<String, String> faqDatabase;
   public static void FAQ() {

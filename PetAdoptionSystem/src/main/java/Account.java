@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
 public class Account {
+
     private String username;
     private String password;
     private static HashMap<String, String> accountMap = new HashMap<>();
@@ -9,10 +11,6 @@ public class Account {
         this.username = username;
         this.password = password;
         accountMap.put(username, password);
-    }
-    public void adopt(Pet pet, String name){
-        System.out.print("pet is adopted");
-        Pet.petAdoptionList.put(pet, new Account(name, name));
     }
 
     public String getusername() {
