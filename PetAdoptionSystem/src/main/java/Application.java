@@ -167,7 +167,7 @@ public class Application {
         System.err.println("Choose one of the given options");
         continue;
       } else {
-        filter.add(key);
+    while (true) {
       }
       }
     }
