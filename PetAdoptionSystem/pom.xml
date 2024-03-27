@@ -1,0 +1,29 @@
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>mygroupid</groupId>
+  <artifactId>myartifactid</artifactId>
+  <version>0.0-SNAPSHOT</version>
+
+<!-- To add the lib package as source code directory -->
+  <configuration>
+    <source>1.8</source>
+    <target>1.8</target>
+    <includes>
+      <include>src/main/java/**/*.java</include>
+      <include>lib/**/*.java</include>
+    </includes>
+  </configuration>
+
+<!-- To add dependency directly using Maven public repositories -->
+  <dependencies>
+    <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-text</artifactId>
+        <version>1.11.0</version>
+    </dependency>
+</dependencies>
+
+</project>
+
+
+
